@@ -2,7 +2,7 @@
   overflow: hidden;
   background-color: #231e25;
   padding: 20px 10px;
-  width: 100%;
+  min-width: 100vh;
   height: 60px;
 }
 
