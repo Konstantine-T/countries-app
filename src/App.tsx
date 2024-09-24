@@ -1,7 +1,7 @@
 import './App.css'
-import Card from './Card'
-import Header from './Header'
-import Hero from './Hero'
+import Card from './components/Card/Card'
+import Header from './components/Header/Header'
+import Hero from './components/Hero/Hero'
 
 
 function App() {
