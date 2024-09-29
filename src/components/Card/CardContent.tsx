@@ -1,22 +1,28 @@
 
 import styles from "./Card.module.css";
-import { thailand } from "./Card";
 
-const CardContent = () => {
+type CardContentProps = {
+  capital: string;
+  population: string;
+  area: string;
+  description: string;
+};
+
+const CardContent: React.FC<CardContentProps> = (props) => {
   return (
     <div className={styles["card-content"]}>
       <div className={styles["card-content"]}>
         <div className={styles["country-property"]}>
-          <strong>Capital City:</strong> {thailand.capital}
+          <strong>Capital City:</strong> {props.capital}
         </div>
         <div className={styles["country-property"]}>
-          <strong>Population:</strong> {thailand.population.toLocaleString()}
+          <strong>Population:</strong> {props.population.toLocaleString()}
         </div>
         <div className={styles["country-property"]}>
-          <strong>Area:</strong> {thailand.area}
+          <strong>Area:</strong> {props.area}
         </div>
       </div>
-      {thailand.description}
+      {props.description}
     </div>
   );
 };
