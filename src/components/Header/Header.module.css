@@ -4,11 +4,14 @@
   padding: 20px 10px;
   min-width: 100vh;
   height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  vertical-align: auto;
 }
 
 .header a {
   float: left;
-  /* color: black; */
   text-align: center;
   padding: 12px;
   text-decoration: none;

@@ -1,6 +1,5 @@
 import styles from './Card.module.css'
-import cliffsImage from "../../assets/cliffs.jpg";
-
+import cliffsImage from "../../../../assets/cliffs.jpg"
 type CardHeaderProps = {
   name: string;
 };
