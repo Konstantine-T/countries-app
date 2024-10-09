@@ -1,12 +1,21 @@
 import { useParams } from "react-router-dom";
-import { countries } from "../list";
 
-const Country = () => {
+interface CountryProps {
+  countriesList: {
+    name: string;
+    capital: string;
+    population: string;
+    area: string;
+    description: string;
+    id: string;
+    likes: number;
+  }[];
+}
+
+const Country: React.FC<CountryProps> = ({ countriesList }) => {
   const { id } = useParams<{ id: string }>();
 
-  const country = countries.find((country) => country.id === id);
-
-  console.log(country);
+  const country = countriesList.find((country) => country.id === id);
 
   if (!country) {
     return <h1>Country not found!</h1>;
