@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Country } from "../../reducer/reducer";
 import styles from "./AddCountry.module.css";
+import { useParams } from "react-router-dom";
 
 interface AddCountryProps {
   onAddCountry: (newCountry: Country) => void;
 }
 
 const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
+  const { lang } = useParams<{ lang: string }>();
+
   const [name, setName] = useState("");
   const [capital, setCapital] = useState("");
   const [population, setPopulation] = useState("");
@@ -71,7 +74,7 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.formGroup}>
-        <label>Country name</label>
+        <label>{lang === "en" ? "Country name" : "ქვეყნის სახელი"}</label>
         <input
           type="text"
           id="countryName"
@@ -81,7 +84,7 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
       </div>
 
       <div className={styles.formGroup}>
-        <label>Capital City</label>
+        <label>{lang === "en" ? "Capital City" : "დედაქალაქი"}</label>
         <input
           type="text"
           id="capitalCity"
@@ -91,7 +94,7 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
       </div>
 
       <div className={styles.formGroup}>
-        <label>Population</label>
+        <label>{lang === "en" ? "Population" : "პოპულაცია"}</label>
         <input
           type="text"
           id="population"
@@ -101,12 +104,14 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
       </div>
 
       <div className={styles.formGroup}>
-        <label>Area</label>
+        <label>{lang === "en" ? "Area" : "ფართობი"}</label>
         <input type="text" id="area" name="area" onChange={handleChange} />
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="message">Additional info</label>
+        <label htmlFor="message">
+          {lang === "en" ? "Additional info" : "დამატებითი ინფო"}
+        </label>
         <textarea
           id="message"
           name="message"
@@ -115,7 +120,7 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
       </div>
 
       <button type="submit" className={styles.submitButton}>
-        Add Country
+        {lang === "en" ? "Add Country" : "დამატება"}
       </button>
     </form>
   );

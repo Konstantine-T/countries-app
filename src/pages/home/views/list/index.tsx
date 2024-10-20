@@ -51,7 +51,7 @@ const CountriesView: React.FC<CountryProps> = ({
         {countriesList.map((country) => {
           return (
             <LazyCard key={country.id}>
-              <Link to={`/country/${country.id}`} className="card-link">
+              <Link to={`country/${country.id}`} className="card-link">
                 <LazyCardHeader name={country.name} />
               </Link>
               <LazyCardContent

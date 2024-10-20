@@ -1,11 +1,14 @@
 import { useState } from "react";
 import styles from "./Form.module.css";
+import { useParams } from "react-router-dom";
 
 const Form: React.FC = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+
+  const { lang } = useParams<{ lang: string }>();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,7 +60,9 @@ const Form: React.FC = () => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.formGroup}>
-        <label htmlFor="firstName">First Name</label>
+        <label htmlFor="firstName">
+          {lang === "en" ? "First Name" : "სახელი"}
+        </label>
         <input
           type="text"
           id="firstName"
@@ -67,7 +72,9 @@ const Form: React.FC = () => {
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="lastName">Last Name</label>
+        <label htmlFor="lastName">
+          {lang === "en" ? "Last Name" : "გვარი"}
+        </label>
         <input
           type="text"
           id="lastName"
@@ -77,12 +84,14 @@ const Form: React.FC = () => {
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">{lang === "en" ? "Email" : "მეილი"}</label>
         <input type="email" id="email" name="email" onChange={handleChange} />
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="message">Message</label>
+        <label htmlFor="message">
+          {lang === "en" ? "Message" : "რამე ჩაგვიწერეთ"}
+        </label>
         <textarea
           id="message"
           name="message"
@@ -91,7 +100,7 @@ const Form: React.FC = () => {
       </div>
 
       <button type="submit" className={styles.submitButton}>
-        Submit
+        {lang === "en" ? "Submit" : "ეგაა"}
       </button>
     </form>
   );

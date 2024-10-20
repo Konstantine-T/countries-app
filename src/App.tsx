@@ -5,7 +5,7 @@ import About from "./pages/about/views";
 import Contact from "./pages/contact/view";
 import Country from "./pages/home/views/country/Country";
 import CountriesView from "./pages/home/views/list";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import {
   countriesReducer,
   initialCountries,
@@ -44,9 +44,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<DefaultLayout />}>
+        <Route path="/:lang" element={<DefaultLayout />}>
           <Route
-            path="/"
+            path="/:lang"
             element={
               <CountriesView
                 countriesList={countriesList}
@@ -65,6 +65,7 @@ function App() {
             element={<Country countriesList={countriesList} />}
           />
         </Route>
+        <Route path="/" element={<Navigate to="/ka" />} />
       </Routes>
     </BrowserRouter>
   );
