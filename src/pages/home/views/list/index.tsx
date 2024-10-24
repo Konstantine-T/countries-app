@@ -19,6 +19,10 @@ interface CountryProps {
     id: string;
     likes: number;
     isDeleted: boolean;
+    image: any;
+    nameGeo: string;
+    capitalGeo: string;
+    descriptionGeo: string;
   }[];
   onLike: (id: string) => void;
   onDelete: (id: string) => void;
@@ -52,7 +56,11 @@ const CountriesView: React.FC<CountryProps> = ({
           return (
             <LazyCard key={country.id}>
               <Link to={`country/${country.id}`} className="card-link">
-                <LazyCardHeader name={country.name} />
+                <LazyCardHeader
+                  name={country.name}
+                  nameGeo={country.nameGeo}
+                  image={country.image}
+                />
               </Link>
               <LazyCardContent
                 {...country}

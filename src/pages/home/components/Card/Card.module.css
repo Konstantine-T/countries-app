@@ -54,4 +54,9 @@
     border-bottom: 1px solid #444;
     padding-bottom: 10px;
   }
+
+  img {
+    width: 200px;
+    height: 200px;
+  }
   

@@ -1,3 +1,7 @@
+import chinaImg from "../../../assets/china.jpg";
+import georgiaImg from "../../../assets/georgia.jpg";
+import thailandImg from "../../../assets/cliffs.jpg";
+
 export interface Country {
   name: string;
   capital: string;
@@ -7,6 +11,11 @@ export interface Country {
   id: string;
   likes: number;
   isDeleted: boolean;
+  image: any;
+
+  nameGeo: string;
+  capitalGeo: string;
+  descriptionGeo: string;
 }
 
 type State = Country[];
@@ -30,6 +39,10 @@ export const initialCountries: State = [
     id: "1",
     likes: 1,
     isDeleted: false,
+    image: thailandImg,
+    nameGeo: "ტაილანდი",
+    capitalGeo: "ბანკოკი",
+    descriptionGeo: "რამე ქართული მააააგარი აღწერა",
   },
   {
     name: "China mate",
@@ -41,6 +54,10 @@ export const initialCountries: State = [
     id: "2",
     likes: 3,
     isDeleted: false,
+    image: chinaImg,
+    nameGeo: "ჩინეთი",
+    capitalGeo: "პეკინი",
+    descriptionGeo: "რამე ქართული მააააგარი აღწერა",
   },
   {
     name: "Georgia",
@@ -52,6 +69,10 @@ export const initialCountries: State = [
     id: "3",
     likes: 0,
     isDeleted: false,
+    image: georgiaImg,
+    nameGeo: "საქართველო",
+    capitalGeo: "თბილისი",
+    descriptionGeo: "რამე ქართული ძაააააააააააააააალიან მააააგარი აღწერა",
   },
 ];
 
