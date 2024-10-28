@@ -1,6 +1,6 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense } from 'react';
 
-const LazyCaption = lazy(() => import("../components/caption/Caption"));
+const LazyCaption = lazy(() => import('../components/caption/Caption'));
 
 const About = () => {
   return (

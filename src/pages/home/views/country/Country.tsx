@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 interface CountryProps {
   countriesList: {
@@ -27,22 +27,22 @@ const Country: React.FC<CountryProps> = ({ countriesList }) => {
   return (
     <div className="country-details">
       <h1>
-        {lang === "en"
-          ? "PAGE FOR DETAILS OF THE COUNTRIES"
-          : "ქვეყნის დეტალური ფეიჯიი??"}
+        {lang === 'en'
+          ? 'PAGE FOR DETAILS OF THE COUNTRIES'
+          : 'ქვეყნის დეტალური ფეიჯიი??'}
       </h1>
-      <h1>{lang === "en" ? country.name : country.nameGeo}</h1>
+      <h1>{lang === 'en' ? country.name : country.nameGeo}</h1>
       <p>
-        {lang === "en" ? "Capital" : "დედაქალაქი"}:{" "}
-        {lang === "en" ? country.capital : country.capitalGeo}
+        {lang === 'en' ? 'Capital' : 'დედაქალაქი'}:{' '}
+        {lang === 'en' ? country.capital : country.capitalGeo}
       </p>
       <p>
-        {lang === "en" ? "Population" : "პოპულაცია"}: {country.population}
+        {lang === 'en' ? 'Population' : 'პოპულაცია'}: {country.population}
       </p>
       <p>
-        {lang === "en" ? "Area" : "ფართობი"} {country.area}
+        {lang === 'en' ? 'Area' : 'ფართობი'} {country.area}
       </p>
-      <p>{lang === "en" ? country.description : country.descriptionGeo}</p>
+      <p>{lang === 'en' ? country.description : country.descriptionGeo}</p>
     </div>
   );
 };

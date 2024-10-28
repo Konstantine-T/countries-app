@@ -1,4 +1,4 @@
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 const LangSwitch = () => {
   const { lang } = useParams<{ lang: string }>();
@@ -6,7 +6,7 @@ const LangSwitch = () => {
   const location = useLocation();
 
   const handleLanguageSwitch = () => {
-    const newLang = lang === "en" ? "ka" : "en";
+    const newLang = lang === 'en' ? 'ka' : 'en';
 
     const newPath = location.pathname.replace(`/${lang}`, `/${newLang}`);
 
@@ -14,7 +14,7 @@ const LangSwitch = () => {
   };
   return (
     <button onClick={handleLanguageSwitch}>
-      {lang === "en" ? "Change language" : "შეცვალე ენა, ბრო"}
+      {lang === 'en' ? 'Change language' : 'შეცვალე ენა, ბრო'}
     </button>
   );
 };

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Country } from "../../reducer/reducer";
-import styles from "./AddCountry.module.css";
-import { useParams } from "react-router-dom";
+import { useState } from 'react';
+import { Country } from '../../reducer/reducer';
+import styles from './AddCountry.module.css';
+import { useParams } from 'react-router-dom';
 
 interface AddCountryProps {
   onAddCountry: (newCountry: Country) => void;
@@ -10,14 +10,14 @@ interface AddCountryProps {
 const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
   const { lang } = useParams<{ lang: string }>();
 
-  const [name, setName] = useState("");
-  const [nameEng, setNameEng] = useState("");
-  const [capital, setCapital] = useState("");
-  const [capitalEng, setCapitalEng] = useState("");
-  const [population, setPopulation] = useState("");
-  const [area, setArea] = useState("");
-  const [description, setDescription] = useState("");
-  const [descriptionEng, setDescriptionEng] = useState("");
+  const [name, setName] = useState('');
+  const [nameEng, setNameEng] = useState('');
+  const [capital, setCapital] = useState('');
+  const [capitalEng, setCapitalEng] = useState('');
+  const [population, setPopulation] = useState('');
+  const [area, setArea] = useState('');
+  const [description, setDescription] = useState('');
+  const [descriptionEng, setDescriptionEng] = useState('');
   const [image, setImage] = useState<any>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,11 +41,11 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
 
       onAddCountry(newCountry);
 
-      setName("");
-      setCapital("");
-      setPopulation("");
-      setArea("");
-      setDescription("");
+      setName('');
+      setCapital('');
+      setPopulation('');
+      setArea('');
+      setDescription('');
       setImage(null);
     }
   };
@@ -53,50 +53,50 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    if (e.target.id === "countryNameEng") {
+    if (e.target.id === 'countryNameEng') {
       setNameEng(e.target.value);
       if (e.target.value.length > 15) {
-        e.target.style.color = "red";
+        e.target.style.color = 'red';
         alert("Country name can't be longer than 15 characters");
       }
-      e.target.style.color = "white";
+      e.target.style.color = 'white';
     }
-    if (e.target.id === "capitalCityEng") {
+    if (e.target.id === 'capitalCityEng') {
       setCapitalEng(e.target.value);
       if (e.target.value.length > 15) {
-        e.target.style.color = "red";
+        e.target.style.color = 'red';
         alert("Capital city name can't be longer than 15 characters");
       }
-      e.target.style.color = "white";
+      e.target.style.color = 'white';
     }
-    if (e.target.id === "population") {
+    if (e.target.id === 'population') {
       setPopulation(e.target.value);
     }
-    if (e.target.id === "area") {
+    if (e.target.id === 'area') {
       setArea(e.target.value);
     }
-    if (e.target.id === "messageEng") {
+    if (e.target.id === 'messageEng') {
       setDescriptionEng(e.target.value);
     }
-    if (e.target.id === "countryName") {
+    if (e.target.id === 'countryName') {
       setName(e.target.value);
       if (e.target.value.length > 15) {
-        e.target.style.color = "red";
+        e.target.style.color = 'red';
         alert("Country name can't be longer than 15 characters");
       }
-      e.target.style.color = "white";
+      e.target.style.color = 'white';
     }
-    if (e.target.id === "capitalCity") {
+    if (e.target.id === 'capitalCity') {
       setCapital(e.target.value);
       if (e.target.value.length > 15) {
-        e.target.style.color = "red";
+        e.target.style.color = 'red';
         alert("Capital city name can't be longer than 15 characters");
       }
-      e.target.style.color = "white";
+      e.target.style.color = 'white';
     }
-    if (e.target.id === "message") {
+    if (e.target.id === 'message') {
       setDescription(e.target.value);
     }
   };
@@ -104,7 +104,7 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
-    if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
+    if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
@@ -112,9 +112,9 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
       reader.readAsDataURL(file);
     } else {
       alert(
-        lang === "en"
-          ? "Please select a .jpg or .png image"
-          : "გთხოვთ აირჩიოთ .jpg ან .png სურათი"
+        lang === 'en'
+          ? 'Please select a .jpg or .png image'
+          : 'გთხოვთ აირჩიოთ .jpg ან .png სურათი',
       );
     }
   };
@@ -122,7 +122,7 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.formGroup}>
-        <label>{lang === "en" ? "Country name" : "ქვეყნის სახელი"}</label>
+        <label>{lang === 'en' ? 'Country name' : 'ქვეყნის სახელი'}</label>
         <input
           type="text"
           id="countryName"
@@ -133,9 +133,9 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
 
       <div className={styles.formGroup}>
         <label>
-          {lang === "en"
-            ? "Country name in english"
-            : "ქვეყნის სახელი (ინგლისურად)"}
+          {lang === 'en'
+            ? 'Country name in english'
+            : 'ქვეყნის სახელი (ინგლისურად)'}
         </label>
         <input
           type="text"
@@ -146,7 +146,7 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
       </div>
 
       <div className={styles.formGroup}>
-        <label>{lang === "en" ? "Capital City" : "დედაქალაქი"}</label>
+        <label>{lang === 'en' ? 'Capital City' : 'დედაქალაქი'}</label>
         <input
           type="text"
           id="capitalCity"
@@ -157,9 +157,9 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
 
       <div className={styles.formGroup}>
         <label>
-          {lang === "en"
-            ? "Capital City in English"
-            : "დედაქალაქი (ინგლისურად)"}
+          {lang === 'en'
+            ? 'Capital City in English'
+            : 'დედაქალაქი (ინგლისურად)'}
         </label>
         <input
           type="text"
@@ -170,7 +170,7 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
       </div>
 
       <div className={styles.formGroup}>
-        <label>{lang === "en" ? "Population" : "პოპულაცია"}</label>
+        <label>{lang === 'en' ? 'Population' : 'პოპულაცია'}</label>
         <input
           type="text"
           id="population"
@@ -180,13 +180,13 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
       </div>
 
       <div className={styles.formGroup}>
-        <label>{lang === "en" ? "Area" : "ფართობი"}</label>
+        <label>{lang === 'en' ? 'Area' : 'ფართობი'}</label>
         <input type="text" id="area" name="area" onChange={handleChange} />
       </div>
 
       <div className={styles.formGroup}>
         <label htmlFor="message">
-          {lang === "en" ? "Additional info" : "დამატებითი ინფო"}
+          {lang === 'en' ? 'Additional info' : 'დამატებითი ინფო'}
         </label>
         <textarea
           id="message"
@@ -197,9 +197,9 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
 
       <div className={styles.formGroup}>
         <label htmlFor="message">
-          {lang === "en"
-            ? "Additional info in English"
-            : "დამატებითი ინფო (ინგლისურად)"}
+          {lang === 'en'
+            ? 'Additional info in English'
+            : 'დამატებითი ინფო (ინგლისურად)'}
         </label>
         <textarea
           id="messageEng"
@@ -209,12 +209,12 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
       </div>
 
       <div className={styles.formGroup}>
-        <label>{lang === "en" ? "Upload image" : "ატვირთეთ სურათი"}</label>
+        <label>{lang === 'en' ? 'Upload image' : 'ატვირთეთ სურათი'}</label>
         <input type="file" accept=".jpg,.png" onChange={handleImageChange} />
       </div>
 
       <button type="submit" className={styles.submitButton}>
-        {lang === "en" ? "Add Country" : "დამატება"}
+        {lang === 'en' ? 'Add Country' : 'დამატება'}
       </button>
     </form>
   );

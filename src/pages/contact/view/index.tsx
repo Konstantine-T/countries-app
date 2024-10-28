@@ -1,6 +1,6 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense } from 'react';
 
-const LazyContact = lazy(() => import("../components/Form"));
+const LazyContact = lazy(() => import('../components/Form'));
 
 const Contact = () => {
   return (

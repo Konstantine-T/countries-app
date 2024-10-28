@@ -1,44 +1,44 @@
-import { useReducer } from "react";
-import "./App.css";
-import DefaultLayout from "./layouts/default/index";
-import About from "./pages/about/views";
-import Contact from "./pages/contact/view";
-import Country from "./pages/home/views/country/Country";
-import CountriesView from "./pages/home/views/list";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useReducer } from 'react';
+import './App.css';
+import DefaultLayout from './layouts/default/index';
+import About from './pages/about/views';
+import Contact from './pages/contact/view';
+import Country from './pages/home/views/country/Country';
+import CountriesView from './pages/home/views/list';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import {
   countriesReducer,
   initialCountries,
-} from "./pages/home/reducer/reducer";
+} from './pages/home/reducer/reducer';
 
 function App() {
   const [countriesList, dispatch] = useReducer(
     countriesReducer,
-    initialCountries
+    initialCountries,
   );
 
   const handleLike = (id: string) => {
-    dispatch({ type: "LIKE_COUNTRY", payload: id });
+    dispatch({ type: 'LIKE_COUNTRY', payload: id });
   };
 
   const handleSort = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (e.currentTarget.textContent === "Sort by Likes (asc)") {
-      dispatch({ type: "SORT_COUNTRIES_ASC" });
+    if (e.currentTarget.textContent === 'Sort by Likes (asc)') {
+      dispatch({ type: 'SORT_COUNTRIES_ASC' });
       return;
     }
-    dispatch({ type: "SORT_COUNTRIES_DESC" });
+    dispatch({ type: 'SORT_COUNTRIES_DESC' });
   };
 
   const handleDelete = (id: string) => {
-    dispatch({ type: "DELETE_COUNTRY", payload: id });
+    dispatch({ type: 'DELETE_COUNTRY', payload: id });
   };
 
   const handleReturn = (id: string) => {
-    dispatch({ type: "RETURN_COUNTRY", payload: id });
+    dispatch({ type: 'RETURN_COUNTRY', payload: id });
   };
 
   const handleAddCountry = (country: any) => {
-    dispatch({ type: "ADD_COUNTRY", payload: country });
+    dispatch({ type: 'ADD_COUNTRY', payload: country });
   };
 
   return (

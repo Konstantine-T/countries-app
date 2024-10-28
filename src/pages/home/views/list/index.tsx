@@ -1,13 +1,13 @@
-import { lazy, Suspense, useState } from "react";
-import styles from "./index.module.css";
-import { Link } from "react-router-dom";
-import AddCountry from "../../components/Form/AddCountry";
-import { Country } from "../../reducer/reducer";
+import { lazy, Suspense, useState } from 'react';
+import styles from './index.module.css';
+import { Link } from 'react-router-dom';
+import AddCountry from '../../components/Form/AddCountry';
+import { Country } from '../../reducer/reducer';
 
-const LazyCard = lazy(() => import("../../components/Card/Card"));
-const LazyCardContent = lazy(() => import("../../components/Card/CardContent"));
-const LazyCardHeader = lazy(() => import("../../components/Card/CardHeader"));
-const LazyHero = lazy(() => import("../../components/Hero/Hero"));
+const LazyCard = lazy(() => import('../../components/Card/Card'));
+const LazyCardContent = lazy(() => import('../../components/Card/CardContent'));
+const LazyCardHeader = lazy(() => import('../../components/Card/CardHeader'));
+const LazyHero = lazy(() => import('../../components/Hero/Hero'));
 
 interface CountryProps {
   countriesList: {
@@ -51,7 +51,7 @@ const CountriesView: React.FC<CountryProps> = ({
         <button onClick={handleSort}>Sort by Likes (desc)</button>
       </div>
       <AddCountry onAddCountry={onAddCountry} />
-      <div className={styles["card-container"]}>
+      <div className={styles['card-container']}>
         {countriesList.map((country) => {
           return (
             <LazyCard key={country.id}>
