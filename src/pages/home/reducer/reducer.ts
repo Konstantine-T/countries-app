@@ -11,7 +11,7 @@ export interface Country {
   id: string;
   likes: number;
   isDeleted: boolean;
-  image: any;
+  image: string;
 
   nameGeo: string;
   capitalGeo: string;

@@ -3,7 +3,7 @@ import styles from './Card.module.css';
 type CardHeaderProps = {
   name: string;
   nameGeo: string;
-  image: any;
+  image: string;
 };
 
 const CardHeader: React.FC<CardHeaderProps> = (props) => {

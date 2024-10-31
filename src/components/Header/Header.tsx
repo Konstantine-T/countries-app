@@ -5,7 +5,7 @@ import LangSwitch from './LangSwitch';
 const Header: React.FC = () => {
   const { lang } = useParams<{ lang: string }>();
   return (
-    <header className={styles["header"]}>
+    <header className={styles['header']}>
       <div>
         <Link to="/">
           <h2 className={styles['logo']}>
@@ -14,7 +14,7 @@ const Header: React.FC = () => {
         </Link>
         <Link to="about">
           <h2 className={styles['logo']}>
-            {lang === 'en' ? 'About' : 'ჩვენს შესახებ'}
+            {lang === 'en' ? 'OTP input' : 'OTP ინფუთი'}
           </h2>
         </Link>
         <Link to="contact">

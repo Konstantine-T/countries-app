@@ -1,14 +1,16 @@
-import { useParams } from 'react-router-dom';
+import OTPInput from '../OTPInput/OTPInput';
 
 const Caption = () => {
-  const { lang } = useParams<{ lang: string }>();
-
   return (
-    <div>
-      {' '}
-      {lang === 'en'
-        ? 'Caption for the about page'
-        : 'ებაუთ ფეიჯი ოღონდ ქართულად, რააა'}
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+      }}
+    >
+      <OTPInput numberOfInputs={9} />
     </div>
   );
 };
