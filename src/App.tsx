@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import './App.css';
 import DefaultLayout from './layouts/default/index';
 import About from './pages/about/views';
@@ -10,16 +10,13 @@ import {
   countriesReducer,
   initialCountries,
 } from './pages/home/reducer/reducer';
+import axios from 'axios';
 
 function App() {
   const [countriesList, dispatch] = useReducer(
     countriesReducer,
     initialCountries,
   );
-
-  const handleLike = (id: string) => {
-    dispatch({ type: 'LIKE_COUNTRY', payload: id });
-  };
 
   const handleSort = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (e.currentTarget.textContent === 'Sort by Likes (asc)') {
@@ -33,13 +30,22 @@ function App() {
     dispatch({ type: 'DELETE_COUNTRY', payload: id });
   };
 
-  const handleReturn = (id: string) => {
-    dispatch({ type: 'RETURN_COUNTRY', payload: id });
-  };
-
   const handleAddCountry = (country: any) => {
     dispatch({ type: 'ADD_COUNTRY', payload: country });
   };
+
+  const fetchCountries = async () => {
+    try {
+      const response = await axios.get('/database.json');
+      dispatch({ type: 'SET_COUNTRIES', payload: response.data.countries });
+    } catch (error) {
+      console.error('Error fetching countries data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCountries();
+  }, [countriesList]);
 
   return (
     <BrowserRouter>
@@ -50,10 +56,8 @@ function App() {
             element={
               <CountriesView
                 countriesList={countriesList}
-                onLike={handleLike}
                 onSort={handleSort}
                 onDelete={handleDelete}
-                onReturnDeleted={handleReturn}
                 onAddCountry={handleAddCountry}
               />
             }

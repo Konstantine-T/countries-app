@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import styles from './index.module.css';
 import { Link } from 'react-router-dom';
 import AddCountry from '../../components/Form/AddCountry';
@@ -24,19 +24,14 @@ interface CountryProps {
     capitalGeo: string;
     descriptionGeo: string;
   }[];
-  onLike: (id: string) => void;
   onDelete: (id: string) => void;
-  onReturnDeleted: (id: string) => void;
   onSort: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onAddCountry: (country: Country) => void;
 }
 
 const CountriesView: React.FC<CountryProps> = ({
   countriesList,
-  onLike,
-  onDelete,
   onSort,
-  onReturnDeleted,
   onAddCountry,
 }) => {
   const handleSort = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -62,12 +57,7 @@ const CountriesView: React.FC<CountryProps> = ({
                   image={country.image}
                 />
               </Link>
-              <LazyCardContent
-                {...country}
-                onLike={() => onLike(country.id)}
-                onDelete={() => onDelete(country.id)}
-                onReturnDeleted={() => onReturnDeleted(country.id)}
-              />
+              <LazyCardContent {...country} />
             </LazyCard>
           );
         })}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Country } from '../../reducer/reducer';
 import styles from './AddCountry.module.css';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 interface AddCountryProps {
   onAddCountry: (newCountry: Country) => void;
@@ -20,7 +21,7 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
   const [descriptionEng, setDescriptionEng] = useState('');
   const [image, setImage] = useState<any>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (name) {
@@ -38,6 +39,8 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
         capitalGeo: capital,
         descriptionGeo: description,
       };
+
+      await axios.post('http://localhost:3001/countries', newCountry);
 
       onAddCountry(newCountry);
 

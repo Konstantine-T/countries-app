@@ -1,7 +1,3 @@
-import chinaImg from '../../../assets/china.jpg';
-import georgiaImg from '../../../assets/georgia.jpg';
-import thailandImg from '../../../assets/cliffs.jpg';
-
 export interface Country {
   name: string;
   capital: string;
@@ -12,7 +8,6 @@ export interface Country {
   likes: number;
   isDeleted: boolean;
   image: string;
-
   nameGeo: string;
   capitalGeo: string;
   descriptionGeo: string;
@@ -21,68 +16,17 @@ export interface Country {
 type State = Country[];
 
 type Action =
-  | { type: 'LIKE_COUNTRY'; payload: string }
   | { type: 'SORT_COUNTRIES_ASC' }
   | { type: 'SORT_COUNTRIES_DESC' }
   | { type: 'DELETE_COUNTRY'; payload: string }
-  | { type: 'RETURN_COUNTRY'; payload: string }
-  | { type: 'ADD_COUNTRY'; payload: Country };
+  | { type: 'ADD_COUNTRY'; payload: Country }
+  | { type: 'SET_COUNTRIES'; payload: Country[] };
 
-export const initialCountries: State = [
-  {
-    name: 'Thailand',
-    capital: 'Bangkok',
-    population: '65 mil',
-    area: '513,120 square km',
-    description:
-      "Thailand is the only Southeast Asian country that was never colonized by an European country. In fact, in the Thai language, the name of the country is Prathet Thai which means 'land of the free.' Very fitting! Thailand is where you'll find both the smallest and the largest creatures.",
-    id: '1',
-    likes: 1,
-    isDeleted: false,
-    image: thailandImg,
-    nameGeo: 'ტაილანდი',
-    capitalGeo: 'ბანკოკი',
-    descriptionGeo: 'რამე ქართული მააააგარი აღწერა',
-  },
-  {
-    name: 'China mate',
-    capital: 'Pekin??',
-    population: 'too many for our planet',
-    area: 'almost as big as russia',
-    description:
-      "China, officially the People's Republic of China (PRC), is a country in East Asia. With a population exceeding 1.4 billion, it is the world's second-most populous country after India, representing 17.4% of the world population.",
-    id: '2',
-    likes: 3,
-    isDeleted: false,
-    image: chinaImg,
-    nameGeo: 'ჩინეთი',
-    capitalGeo: 'პეკინი',
-    descriptionGeo: 'რამე ქართული მააააგარი აღწერა',
-  },
-  {
-    name: 'Georgia',
-    capital: 'Tbilisi',
-    population: '3 mil',
-    area: '69 square km',
-    description:
-      'Georgia is a transcontinental country in Eastern Europe and West Asia. It is part of the Caucasus region, bounded by the Black Sea to the west, Russia to the north, Turkey to the southwest, and Armenia to the south.',
-    id: '3',
-    likes: 0,
-    isDeleted: false,
-    image: georgiaImg,
-    nameGeo: 'საქართველო',
-    capitalGeo: 'თბილისი',
-    descriptionGeo: 'რამე ქართული ძაააააააააააააააალიან მააააგარი აღწერა',
-  },
-];
+export const initialCountries: State = [];
 
 export const countriesReducer = (state: State, action: Action): State => {
-  if (action.type === 'LIKE_COUNTRY') {
-    return state.map((country) =>
-      country.id === action.payload
-        ? { ...country, likes: country.likes + 1 }
-        : country,
-    );
+  if (action.type === 'SET_COUNTRIES') {
+    return action.payload;
   }
 
   if (action.type === 'SORT_COUNTRIES_DESC') {
@@ -107,17 +51,8 @@ export const countriesReducer = (state: State, action: Action): State => {
     }
   }
 
-  if (action.type === 'RETURN_COUNTRY') {
-    return state.map((country) => {
-      if (country.id === action.payload) {
-        return { ...country, isDeleted: false };
-      }
-      return country;
-    });
-  }
-
   if (action.type === 'ADD_COUNTRY') {
-    return [...state, action.payload];
+    return [...state];
   }
 
   return state;
