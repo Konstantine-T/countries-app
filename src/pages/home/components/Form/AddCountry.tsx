@@ -3,6 +3,7 @@ import { Country } from '../../reducer/reducer';
 import styles from './AddCountry.module.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useMutation } from '@tanstack/react-query';
 
 interface AddCountryProps {
   onAddCountry: (newCountry: Country) => void;
@@ -20,6 +21,20 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
   const [description, setDescription] = useState('');
   const [descriptionEng, setDescriptionEng] = useState('');
   const [image, setImage] = useState<any>(null);
+
+  const mutation = useMutation(
+    async (newCountry: Country) => {
+      return await axios.post('http://localhost:3001/countries', newCountry);
+    },
+    {
+      onSuccess: (data) => {
+        onAddCountry(data.data);
+      },
+      onError: (error) => {
+        console.error('Error adding country:', error);
+      },
+    },
+  );
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,7 +55,7 @@ const AddCountry: React.FC<AddCountryProps> = ({ onAddCountry }) => {
         descriptionGeo: description,
       };
 
-      await axios.post('http://localhost:3001/countries', newCountry);
+      mutation.mutate(newCountry);
 
       onAddCountry(newCountry);
 

@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useReducer } from 'react';
 import './App.css';
 import DefaultLayout from './layouts/default/index';
 import About from './pages/about/views';
@@ -10,7 +10,8 @@ import {
   countriesReducer,
   initialCountries,
 } from './pages/home/reducer/reducer';
-import axios from 'axios';
+import { getCountries } from './api/countries';
+import { useQuery } from '@tanstack/react-query';
 
 function App() {
   const [countriesList, dispatch] = useReducer(
@@ -34,18 +35,14 @@ function App() {
     dispatch({ type: 'ADD_COUNTRY', payload: country });
   };
 
-  const fetchCountries = async () => {
-    try {
-      const response = await axios.get('/database.json');
-      dispatch({ type: 'SET_COUNTRIES', payload: response.data.countries });
-    } catch (error) {
-      console.error('Error fetching countries data:', error);
-    }
-  };
+  const { error, isLoading } = useQuery({
+    queryKey: ['countries'],
+    queryFn: getCountries,
+    onSuccess: (data) => dispatch({ type: 'SET_COUNTRIES', payload: data }),
+  });
 
-  useEffect(() => {
-    fetchCountries();
-  }, [countriesList]);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading countries data.</div>;
 
   return (
     <BrowserRouter>
