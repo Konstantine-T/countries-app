@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import styles from './Card.module.css';
 import axios from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type CardContentProps = {
   capital: string;
@@ -16,13 +17,19 @@ type CardContentProps = {
 
 const CardContent: React.FC<CardContentProps> = (props) => {
   const { lang } = useParams<{ lang: string }>();
+  const queryClient = useQueryClient();
 
-  const handleDelete = async () => {
-    await axios.delete(`http://localhost:3001/countries/${props.id}`);
-  };
+  const deleteMutation = useMutation({
+    mutationFn: async () => {
+      await axios.delete(`http://localhost:3001/countries/${props.id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['countries']);
+    },
+  });
 
-  const handleLike = async () => {
-    try {
+  const likeMutation = useMutation({
+    mutationFn: async () => {
       const response = await axios.get(
         `http://localhost:3001/countries/${props.id}`,
       );
@@ -32,13 +39,23 @@ const CardContent: React.FC<CardContentProps> = (props) => {
         ...country,
         likes: country.likes + 1,
       };
+
       await axios.put(
         `http://localhost:3001/countries/${props.id}`,
         updatedCountry,
       );
-    } catch (e) {
-      console.log(e);
-    }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['countries']);
+    },
+  });
+
+  const handleDelete = async () => {
+    deleteMutation.mutate();
+  };
+
+  const handleLike = async () => {
+    likeMutation.mutate();
   };
 
   return (
