@@ -14,7 +14,11 @@ const CardHeader: React.FC<CardHeaderProps> = (props) => {
       <img src={props.image} alt="" />
       <div className={styles['card-header-caption']}>
         <div className={styles['card-title']}>
-          {lang === 'en' ? props.name : props.nameGeo}
+          {lang === 'en'
+            ? props.name
+            : props.nameGeo
+              ? props.nameGeo
+              : props.name}
         </div>
       </div>
     </div>

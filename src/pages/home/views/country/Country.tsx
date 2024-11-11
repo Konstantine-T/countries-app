@@ -1,24 +1,27 @@
+import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import { getCountry } from '../../../../../src/api/countries/index';
+import { useState } from 'react';
 
-interface CountryProps {
-  countriesList: {
-    name: string;
-    capital: string;
-    population: string;
-    area: string;
-    description: string;
-    id: string;
-    likes: number;
-    nameGeo: string;
-    capitalGeo: string;
-    descriptionGeo: string;
-  }[];
-}
-
-const Country: React.FC<CountryProps> = ({ countriesList }) => {
+const Country: React.FC = () => {
   const { id, lang } = useParams<{ id: string; lang: string }>();
+  const [country, setCountry] = useState<any>(null);
 
-  const country = countriesList.find((country) => country.id === id);
+  const { data, error, isLoading } = useQuery(
+    ['country', id],
+    () => getCountry(id!),
+    {
+      enabled: !!id,
+      onSuccess: (data) => setCountry(data),
+    },
+  );
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading country data</p>;
+
+  if (!data) {
+    return <h1>Country not found!</h1>;
+  }
 
   if (!country) {
     return <h1>Country not found!</h1>;
@@ -31,10 +34,10 @@ const Country: React.FC<CountryProps> = ({ countriesList }) => {
           ? 'PAGE FOR DETAILS OF THE COUNTRIES'
           : 'ქვეყნის დეტალური ფეიჯიი??'}
       </h1>
-      <h1>{lang === 'en' ? country.name : country.nameGeo}</h1>
+      <h1>{lang === 'en' ? country.name : country.name}</h1>
       <p>
         {lang === 'en' ? 'Capital' : 'დედაქალაქი'}:{' '}
-        {lang === 'en' ? country.capital : country.capitalGeo}
+        {lang === 'en' ? country.capital : country.capital}
       </p>
       <p>
         {lang === 'en' ? 'Population' : 'პოპულაცია'}: {country.population}
@@ -42,7 +45,7 @@ const Country: React.FC<CountryProps> = ({ countriesList }) => {
       <p>
         {lang === 'en' ? 'Area' : 'ფართობი'} {country.area}
       </p>
-      <p>{lang === 'en' ? country.description : country.descriptionGeo}</p>
+      <p>{lang === 'en' ? country.description : country.description}</p>
     </div>
   );
 };

@@ -61,10 +61,7 @@ function App() {
           />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
-          <Route
-            path="country/:id"
-            element={<Country countriesList={countriesList} />}
-          />
+          <Route path="country/:id" element={<Country />} />
         </Route>
         <Route path="/" element={<Navigate to="/ka" />} />
       </Routes>
